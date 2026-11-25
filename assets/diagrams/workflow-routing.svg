@@ -1,0 +1,135 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 420" role="img" aria-labelledby="wf-title wf-desc">
+  <title id="wf-title">GLAF4 Dev 意图分诊与开发审查双轨闭环图</title>
+  <desc id="wf-desc">展示开发者诉求经 quickstart 唯一路由决策表分流至七条带任务生命周期的 TDD 开发工作流或第八条只读 AI 代码审查工作流。</desc>
+  <style>
+    svg {
+      color: #1e293b;
+      --ink: #0f172a;
+      --muted: #475569;
+      --line: rgba(100, 116, 139, 0.55);
+      --panel-bg: rgba(99, 102, 241, 0.08);
+      --panel-stroke: rgba(99, 102, 241, 0.42);
+      --dev-bg: rgba(16, 185, 129, 0.09);
+      --dev-stroke: rgba(16, 185, 129, 0.45);
+      --rev-bg: rgba(14, 165, 233, 0.09);
+      --rev-stroke: rgba(14, 165, 233, 0.45);
+      --chip-bg: rgba(148, 163, 184, 0.16);
+      --chip-stroke: rgba(148, 163, 184, 0.38);
+      --accent-indigo: #4f46e5;
+      --accent-emerald: #059669;
+      --accent-sky: #0284c7;
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+    @media (prefers-color-scheme: dark) {
+      svg {
+        color: #e2e8f0;
+        --ink: #f1f5f9;
+        --muted: #94a3b8;
+        --line: rgba(148, 163, 184, 0.6);
+        --panel-bg: rgba(99, 102, 241, 0.16);
+        --panel-stroke: rgba(129, 140, 248, 0.55);
+        --dev-bg: rgba(16, 185, 129, 0.15);
+        --dev-stroke: rgba(52, 211, 153, 0.55);
+        --rev-bg: rgba(14, 165, 233, 0.15);
+        --rev-stroke: rgba(56, 189, 248, 0.55);
+        --chip-bg: rgba(148, 163, 184, 0.18);
+        --chip-stroke: rgba(148, 163, 184, 0.42);
+        --accent-indigo: #818cf8;
+        --accent-emerald: #34d399;
+        --accent-sky: #38bdf8;
+      }
+    }
+    .t-title { fill: var(--ink); font-size: 14px; font-weight: 700; }
+    .t-sub { fill: var(--muted); font-size: 11.5px; }
+    .t-badge { font-size: 11px; font-weight: 600; }
+    .t-step { fill: var(--ink); font-size: 12px; font-weight: 600; }
+    .box-entry { fill: var(--chip-bg); stroke: var(--chip-stroke); stroke-width: 1.5; }
+    .box-router { fill: var(--panel-bg); stroke: var(--panel-stroke); stroke-width: 1.8; }
+    .box-dev { fill: var(--dev-bg); stroke: var(--dev-stroke); stroke-width: 1.8; }
+    .box-rev { fill: var(--rev-bg); stroke: var(--rev-stroke); stroke-width: 1.8; }
+    .step-pill { fill: var(--chip-bg); stroke: var(--chip-stroke); stroke-width: 1.2; }
+    .connector { fill: none; stroke: var(--line); stroke-width: 1.8; marker-end: url(#arrow); }
+  </style>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8.5 5 L 0 8.5 z" fill="currentColor" fill-opacity="0.65"/>
+    </marker>
+  </defs>
+
+  <!-- 左侧：辅助与请求入口 -->
+  <rect class="box-entry" x="20" y="54" width="166" height="92" rx="12"/>
+  <text class="t-title" x="36" y="82">只读诊断入口</text>
+  <text class="t-sub" x="36" y="104">• help：查看能力与版本</text>
+  <text class="t-sub" x="36" y="124">• setup：核验 JDK/Maven</text>
+
+  <rect class="box-entry" x="20" y="176" width="166" height="178" rx="12"/>
+  <text class="t-title" x="36" y="204">研发与审查诉求</text>
+  <text class="t-sub" x="36" y="228">• 新工程脚手架初始化</text>
+  <text class="t-sub" x="36" y="248">• 单元 / 集成测试补全</text>
+  <text class="t-sub" x="36" y="268">• 新功能 TDD / 缺陷修复</text>
+  <text class="t-sub" x="36" y="288">• 测试保护下的等价重构</text>
+  <text class="t-sub" x="36" y="308">• 变更代码只读审查</text>
+  <text class="t-sub" x="36" y="332">支持自然语言或直调入口</text>
+
+  <!-- 中间：quickstart 路由决策表 -->
+  <rect class="box-router" x="212" y="132" width="218" height="166" rx="14"/>
+  <text class="t-badge" x="230" y="158" fill="var(--accent-indigo)">唯一分诊枢纽</text>
+  <text class="t-title" x="230" y="182">quickstart 路由决策表</text>
+  <text class="t-sub" x="230" y="206">依据 routing-decision-table</text>
+  <text class="t-sub" x="230" y="226">精确命中唯一业务 Owner</text>
+  <text class="t-sub" x="230" y="250">• 零修改源码、不建任务</text>
+  <text class="t-sub" x="230" y="270">• 歧义或缺项返回 NEEDS_INPUT</text>
+
+  <path class="connector" d="M 186 245 L 210 225"/>
+  <path class="connector" d="M 321 132 L 321 100 L 188 100"/>
+
+  <!-- 右上：七种带 run 的开发工作流 -->
+  <rect class="box-dev" x="462" y="32" width="438" height="176" rx="14"/>
+  <text class="t-badge" x="482" y="58" fill="var(--accent-emerald)">开发轨道 · 七种带任务生命周期的模式</text>
+  <text class="t-title" x="482" y="82">确定性门禁驱动的开发闭环（Owner + 写租约）</text>
+  <text class="t-sub" x="482" y="104">覆盖初始化、测试底座、单元/集成补测、特性 TDD、缺陷回归、受保护重构</text>
+
+  <rect class="step-pill" x="482" y="120" width="76" height="34" rx="8"/>
+  <text class="t-step" x="520" y="141" text-anchor="middle">前置核验</text>
+
+  <rect class="step-pill" x="572" y="120" width="82" height="34" rx="8"/>
+  <text class="t-step" x="613" y="141" text-anchor="middle">测试 / RED</text>
+
+  <rect class="step-pill" x="668" y="120" width="76" height="34" rx="8"/>
+  <text class="t-step" x="706" y="141" text-anchor="middle">最小实现</text>
+
+  <rect class="step-pill" x="758" y="120" width="122" height="34" rx="8"/>
+  <text class="t-step" x="819" y="141" text-anchor="middle">GREEN 与门禁收口</text>
+
+  <path class="connector" d="M 558 137 L 570 137"/>
+  <path class="connector" d="M 654 137 L 666 137"/>
+  <path class="connector" d="M 744 137 L 756 137"/>
+  <text class="t-sub" x="482" y="182">写集扫描 · Schema 校验 · 编译与测试证据 · 失败即关闭（fail-closed）</text>
+
+  <!-- 右下：第八条只读 AI 代码审查 -->
+  <rect class="box-rev" x="462" y="228" width="438" height="164" rx="14"/>
+  <text class="t-badge" x="482" y="254" fill="var(--accent-sky)">审查轨道 · 第八条独立只读工作流</text>
+  <text class="t-title" x="482" y="278">glaf4-dev-ai-code-review 六步审查规程</text>
+  <text class="t-sub" x="482" y="300">全程只读访问目标工程，不进入写租约，可导出标准审阅交接 JSON</text>
+
+  <rect class="step-pill" x="482" y="316" width="90" height="34" rx="8"/>
+  <text class="t-step" x="527" y="337" text-anchor="middle">固定规则扫描</text>
+
+  <rect class="step-pill" x="586" y="316" width="90" height="34" rx="8"/>
+  <text class="t-step" x="631" y="337" text-anchor="middle">语义规则切片</text>
+
+  <rect class="step-pill" x="690" y="316" width="88" height="34" rx="8"/>
+  <text class="t-step" x="734" y="337" text-anchor="middle">跨文件六维</text>
+
+  <rect class="step-pill" x="792" y="316" width="88" height="34" rx="8"/>
+  <text class="t-step" x="836" y="337" text-anchor="middle">中文影响解释</text>
+
+  <path class="connector" d="M 572 333 L 584 333"/>
+  <path class="connector" d="M 676 333 L 688 333"/>
+  <path class="connector" d="M 778 333 L 790 333"/>
+  <text class="t-sub" x="482" y="374">分别输出：固定门禁结论 · 审查执行状态 · 被审代码整体结论</text>
+
+  <!-- 分诊连线 -->
+  <path class="connector" d="M 430 185 C 446 185, 448 120, 460 120"/>
+  <path class="connector" d="M 430 245 C 446 245, 448 310, 460 310"/>
+</svg>
